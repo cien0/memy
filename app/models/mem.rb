@@ -4,6 +4,9 @@ class Mem < ActiveRecord::Base
   validates_attachment :image, :content_type => { :content_type => ["image/jpg","image/jpeg","image/gif","image/png"]}
   after_validation(on: :create) do
       self.active=false
-  validates :name, presence: true
-  end
+   end
+   validates :name, presence: true
+   scope :active, ->{where active: true}
+   scope :inactive, ->{where active: false}
+
 end
